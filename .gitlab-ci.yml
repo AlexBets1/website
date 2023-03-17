@@ -23,19 +23,14 @@ lint-test-job:
     - sleep 10
     - echo "No lint issues found."
 
-deploy-job:      #.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+
 staging-deploy:
   stage: deploy
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
-  - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
+  - dpl --provider=heroku --app=webs1te --api-key=$HEROKU_STAGING_API_KEY
   only:
   - main
 production-deploy:
@@ -44,6 +39,6 @@ production-deploy:
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
-  - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
+  - dpl --provider=heroku --app=webs1te  --api-key=$HEROKU_PRODUCTION_API_KEY
   only:
   - tags
