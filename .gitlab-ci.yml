@@ -29,3 +29,12 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
+staging:
+  stage: deploy
+  script:
+    - apt-get update -yq
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=my-app-staging --api_key=$HEROKU_STAGING_API_KEY
+  only:
+    - main
