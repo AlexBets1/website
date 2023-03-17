@@ -35,6 +35,8 @@ staging:
     - apt-get update -yq
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=website-1 --api_key=$HEROKU_STAGING_API_KEY
+    - dpl --provider=heroku --HEROKU_APP_NAME--api_key=$HEROKU_STAGING_API_KEY
+  environment:
+    - HEROKU_APP_HOST
   only:
     - main
