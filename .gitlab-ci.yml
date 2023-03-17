@@ -32,12 +32,17 @@ deploy-job:
 staging:
   stage: deploy
   script:
-    - apt-get update -yq
-    - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --HEROKU_APP_NAME--api_key=$HEROKU_STAGING_API_KEY
-  environment:
-    - name: main
-    - url:  HEROKU_APP_HOST
+    - dpl heroku api --app=my-app-staging --api_key=$HEROKU_STAGING_API_KEY
   only:
     - main
+  environment: staging
+
+production:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl heroku api --app=my-app-production --api_key=$HEROKU_PRODUCTION_API_KEY
+  only:
+    - tags
+  environment: production
