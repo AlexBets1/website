@@ -30,7 +30,7 @@ deploy-job:      # This job runs in the deploy stage.
     - echo "Deploying application..."
     - echo "Application successfully deployed."
 staging:
-
+  stage: deploy
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
@@ -38,9 +38,8 @@ staging:
   - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master
-
 production:
-
+  stage: deploy
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
