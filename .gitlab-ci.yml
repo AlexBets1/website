@@ -30,7 +30,7 @@ deploy-job:      # This job runs in the deploy stage.
     - echo "Deploying application..."
     - echo "Application successfully deployed."
 staging:
-  type: deploy
+
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
@@ -40,7 +40,7 @@ staging:
   - master
 
 production:
-  type: deploy
+
   script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
