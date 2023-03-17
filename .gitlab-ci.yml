@@ -23,7 +23,7 @@ lint-test-job:
     - sleep 10
     - echo "No lint issues found."
 
-deploy-job:      # This job runs in the deploy stage.
+deploy-job:
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
   script:
@@ -37,6 +37,7 @@ staging:
     - gem install dpl
     - dpl --provider=heroku --HEROKU_APP_NAME--api_key=$HEROKU_STAGING_API_KEY
   environment:
-    - HEROKU_APP_HOST
+    - name: main
+    - url:  HEROKU_APP_HOST
   only:
     - main
